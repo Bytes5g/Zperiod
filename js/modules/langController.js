@@ -227,6 +227,33 @@ function updateDropdown() {
   });
 }
 
+function detectBrowserLanguage() {
+  const rawCandidates = [
+    ...(Array.isArray(navigator.languages) ? navigator.languages : []),
+    navigator.language,
+    navigator.userLanguage,
+  ].filter(Boolean);
+
+  for (const raw of rawCandidates) {
+    const normalized = String(raw).trim();
+    if (!normalized) continue;
+
+    // Exact match first (e.g. zh-Hant).
+    if (SUPPORTED.includes(normalized)) return normalized;
+
+    const lowered = normalized.toLowerCase();
+    if (lowered.startsWith("zh-hant") || lowered.startsWith("zh-tw") || lowered.startsWith("zh-hk")) {
+      return "zh-Hant";
+    }
+    if (lowered.startsWith("zh")) return "zh";
+
+    const base = lowered.split("-")[0];
+    if (SUPPORTED.includes(base)) return base;
+  }
+
+  return DEFAULT;
+}
+
 // ── Init ──
 
 export function initLangController() {
@@ -237,6 +264,10 @@ export function initLangController() {
   }
   if (saved && SUPPORTED.includes(saved)) {
     lang = saved;
+  } else {
+    const detected = detectBrowserLanguage();
+    lang = detected;
+    localStorage.setItem(STORAGE_KEY, detected);
   }
   applyDocumentLanguageAttributes(lang);
 

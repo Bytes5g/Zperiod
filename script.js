@@ -141,12 +141,12 @@ function initWelcomeModal() {
   
   // Cache busting force reload (one-time for each release)
   const lastForced = localStorage.getItem("zperiod_force_refresh");
-  if (lastForced !== CURRENT_VERSION) {
+  const refreshedThisSession = sessionStorage.getItem("zperiod_force_refreshed") === "true";
+  if (lastForced !== CURRENT_VERSION && !refreshedThisSession) {
     localStorage.setItem("zperiod_force_refresh", CURRENT_VERSION);
-    // Add version to URL and reload to bypass disk cache once
-    const url = new URL(window.location.href);
-    url.searchParams.set('v', CURRENT_VERSION);
-    window.location.replace(url.toString());
+    sessionStorage.setItem("zperiod_force_refreshed", "true");
+    // Reload once for the new release without modifying the visible URL.
+    window.location.reload();
     return;
   }
 
