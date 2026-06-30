@@ -4,6 +4,8 @@
 // reusable Vector3 pool, for-loop hot paths, capped DPR
 // =============================================================================
 
+import threeLibUrl from "../../three.min.js?url";
+
 // ===== Module-level state =====
 let scene, camera, renderer, atomGroup, animationId;
 let electrons = [];
@@ -117,7 +119,7 @@ export function ensureThreeLibLoaded() {
       return;
     }
     const script = document.createElement("script");
-    script.src = "three.min.js";
+    script.src = threeLibUrl;
     script.async = true;
     script.dataset.zperiodThree = "1";
     script.onload = () => resolve(window.THREE);
