@@ -202,6 +202,66 @@ function applyDocumentLanguageAttributes(targetLang) {
   html.dir = RTL_LANGS.has(targetLang) ? "rtl" : "ltr";
 }
 
+function setMetaContent(selector, value) {
+  if (!value) return;
+  const el = document.querySelector(selector);
+  if (el) el.setAttribute("content", value);
+}
+
+function applySeoTranslations(targetLang) {
+  const seoByLang = {
+    en: {
+      title: "Interactive Periodic Table & Chemical Equation Balancer | Free Chemistry Tool - Zperiod",
+      description:
+        "Zperiod is a free interactive chemistry platform with an animated periodic table, 3D atom models, a chemical equation balancer, empirical formula calculator, and exam-ready tools for Grade 9-12 students.",
+      ogTitle: "Interactive Periodic Table & Chemical Equation Balancer | Zperiod",
+      ogDescription:
+        "Free interactive chemistry platform with 3D atom models, a chemical equation balancer, empirical formula calculator, and 118 elements at your fingertips.",
+      twitterTitle: "Interactive Periodic Table & Chemical Equation Balancer | Zperiod",
+      twitterDescription:
+        "Free interactive chemistry platform with 3D atom models, equation balancer, and 118 elements.",
+      ogLocale: "en_US",
+      jsonLdDescription:
+        "Free interactive periodic table with 3D atom models, chemical equation balancer, empirical formula calculator, and chemistry learning tools for Grade 9-12 students.",
+    },
+    ar: {
+      title: "الجدول الدوري التفاعلي وموازن المعادلات الكيميائية | أداة كيمياء مجانية - Zperiod",
+      description:
+        "Zperiod منصة كيمياء تفاعلية مجانية تتضمن جدولاً دورياً متحركاً، ونماذج ذرة ثلاثية الأبعاد، وموازن معادلات كيميائية، وحاسبة الصيغة الأولية، وأدوات جاهزة لطلاب الصفوف 9-12.",
+      ogTitle: "الجدول الدوري التفاعلي وموازن المعادلات الكيميائية | Zperiod",
+      ogDescription:
+        "منصة كيمياء تفاعلية مجانية مع نماذج ذرة ثلاثية الأبعاد، وموازن معادلات كيميائية، وحاسبة الصيغة الأولية، و118 عنصراً بين يديك.",
+      twitterTitle: "الجدول الدوري التفاعلي وموازن المعادلات الكيميائية | Zperiod",
+      twitterDescription:
+        "منصة كيمياء تفاعلية مجانية مع نماذج ذرة ثلاثية الأبعاد، وموازن معادلات، و118 عنصراً.",
+      ogLocale: "ar_AR",
+      jsonLdDescription:
+        "جدول دوري تفاعلي مجاني مع نماذج ذرة ثلاثية الأبعاد، وموازن معادلات كيميائية، وحاسبة الصيغة الأولية، وأدوات تعلم الكيمياء لطلاب الصفوف 9-12.",
+    },
+  };
+
+  const seo = seoByLang[targetLang] || seoByLang.en;
+
+  document.title = seo.title;
+  setMetaContent('meta[name="description"]', seo.description);
+  setMetaContent('meta[property="og:title"]', seo.ogTitle);
+  setMetaContent('meta[property="og:description"]', seo.ogDescription);
+  setMetaContent('meta[property="og:locale"]', seo.ogLocale);
+  setMetaContent('meta[name="twitter:title"]', seo.twitterTitle);
+  setMetaContent('meta[name="twitter:description"]', seo.twitterDescription);
+
+  const ldJsonEl = document.querySelector('script[type="application/ld+json"]');
+  if (ldJsonEl?.textContent) {
+    try {
+      const json = JSON.parse(ldJsonEl.textContent);
+      json.description = seo.jsonLdDescription;
+      ldJsonEl.textContent = JSON.stringify(json);
+    } catch {
+      // Ignore malformed JSON-LD to avoid blocking i18n initialization.
+    }
+  }
+}
+
 // ── DOM translation ──
 
 export function applyStaticTranslations() {
@@ -270,6 +330,7 @@ export function initLangController() {
     localStorage.setItem(STORAGE_KEY, detected);
   }
   applyDocumentLanguageAttributes(lang);
+  applySeoTranslations(lang);
 
   if (sessionStorage.getItem("zperiod_lang_transition") === "true") {
     sessionStorage.removeItem("zperiod_lang_transition");
