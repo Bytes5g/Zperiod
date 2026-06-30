@@ -5,8 +5,9 @@
 import { translations } from "../data/translations.js";
 
 const STORAGE_KEY = "zperiod_lang";
-const SUPPORTED = ["en", "zh", "zh-Hant", "fr", "ru", "fa", "ur", "tl"];
+const SUPPORTED = ["en", "ar", "zh", "zh-Hant", "fr", "ru", "fa", "ur", "tl"];
 const DEFAULT = "en";
+const RTL_LANGS = new Set(["ar", "fa", "ur"]);
 
 let lang = DEFAULT;
 let callbacks = [];
@@ -195,6 +196,12 @@ export function registerCacheCleanup(fn) {
   cacheCleanupFns.push(fn);
 }
 
+function applyDocumentLanguageAttributes(targetLang) {
+  const html = document.documentElement;
+  html.lang = targetLang;
+  html.dir = RTL_LANGS.has(targetLang) ? "rtl" : "ltr";
+}
+
 // ── DOM translation ──
 
 export function applyStaticTranslations() {
@@ -231,7 +238,7 @@ export function initLangController() {
   if (saved && SUPPORTED.includes(saved)) {
     lang = saved;
   }
-  document.documentElement.lang = lang;
+  applyDocumentLanguageAttributes(lang);
 
   if (sessionStorage.getItem("zperiod_lang_transition") === "true") {
     sessionStorage.removeItem("zperiod_lang_transition");

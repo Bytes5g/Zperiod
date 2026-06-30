@@ -21,7 +21,7 @@ export const arUI = {
   "aria": {
     "changeLanguage": "تغيير اللغة",
     "closeWelcomeDialog": "إغلاق مربع حوار الترحيب",
-    "closeChangelog": "Close changelog",
+    "closeChangelog": "إغلاق سجل التحديثات",
     "closeToolDialog": "إغلاق مربع حوار الأداة",
     "openToolHelp": "فتح مساعدة الأداة",
     "closeHelp": "إغلاق المساعدة",
@@ -162,7 +162,7 @@ export const arUI = {
     "chipUIDesign": "واجهة المستخدم / التصميم",
     "chipOther": "أخرى",
     "suggestPlaceholder": "اكتب اقتراحك...",
-    "changelog": "Changelog",
+    "changelog": "سجل التحديثات",
     "addLanguage": "إضافة لغة",
     "darkMode": "الوضع المظلم"
   },
@@ -694,7 +694,7 @@ export const arUI = {
     "pill3": "جاهز للاختبار",
     "cta": "ابدأ الآن",
     "footer": "الإصدار 2.0 · نسخة مختبر الدقة",
-    "viewUpdateHistory": "View Update History",
+    "viewUpdateHistory": "عرض سجل التحديثات",
     "authorRole": "المبتكر ومطور البرمجيات المتكامل",
     "schoolInfo": "مدرسة أورورا الثانوية · الصف الحادي عشر (2027)",
     "location": "تورونتو (كندا)"
