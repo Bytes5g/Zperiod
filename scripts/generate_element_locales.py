@@ -19,6 +19,7 @@ EN_SOURCE_PATH = ROOT / "en_source.json"
 OUT_DIR = ROOT / "js" / "data" / "locales"
 
 LANG_CONFIG = {
+    "ar": {"module": "ar.js", "export": "ar_elements", "target": "ar"},
     "fr": {"module": "fr.js", "export": "fr_elements", "target": "fr"},
     "ru": {"module": "ru.js", "export": "ru_elements", "target": "ru"},
     "fa": {"module": "fa.js", "export": "fa_elements", "target": "fa"},
@@ -145,6 +146,13 @@ STRING_REPLACEMENTS = {
         "CRTs/LEDs": "ЭЛТ/светодиоды",
         "TV/LEDs": "ТВ/светодиоды",
         "MRI": "МРТ",
+    },
+    "ar": {
+        "WWI": "الحرب العالمية الأولى",
+        "LEDs": "صمامات ثنائية باعثة للضوء",
+        "CRTs/LEDs": "شاشات كاثود/صمامات ثنائية باعثة للضوء",
+        "TV/LEDs": "تلفاز/صمامات ثنائية باعثة للضوء",
+        "MRI": "التصوير بالرنين المغناطيسي",
     },
     "fa": {
         "WWI": "جنگ جهانی اول",

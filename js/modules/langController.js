@@ -16,6 +16,10 @@ export const elementLocales = {};
 export const ionLocales = {};
 
 const ELEMENT_LOCALE_LOADERS = {
+  ar: async () => {
+    const module = await import("../data/locales/ar.js");
+    return module.ar_elements;
+  },  
   zh: async () => {
     const module = await import("../data/locales/zh.js");
     return module.zh_elements;
@@ -47,6 +51,10 @@ const ELEMENT_LOCALE_LOADERS = {
 };
 
 const ION_LOCALE_LOADERS = {
+  ar: async () => {
+    const module = await import("../data/locales/ions/ar.js");
+    return module.ar_ions;
+  },
   zh: async () => {
     const module = await import("../data/locales/ions/zh.js");
     return module.zh_ions;

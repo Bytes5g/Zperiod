@@ -5,6 +5,7 @@
 import { deepMerge } from "../utils/objects.js"; // We should move deepMerge here
 
 import { enUI } from "./locales/ui/en.js";
+import { arUI } from "./locales/ui/ar.js";
 import { zhUI } from "./locales/ui/zh.js";
 import { frUI } from "./locales/ui/fr.js";
 import { zhHantUI } from "./locales/ui/zh-Hant.js";
@@ -15,6 +16,7 @@ import { tlUI } from "./locales/ui/tl.js";
 
 export const translations = {
   "en": enUI,
+  "ar": arUI,
   "zh": zhUI,
   "fr": frUI,
   "zh-Hant": zhHantUI,

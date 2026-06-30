@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "js" / "data" / "locales" / "ions"
 
 LANG_CONFIG = {
+    "ar": {"module": "ar.js", "export": "ar_ions", "target": "ar"},
     "zh": {"module": "zh.js", "export": "zh_ions", "target": "zh-CN"},
     "fr": {"module": "fr.js", "export": "fr_ions", "target": "fr"},
     "ru": {"module": "ru.js", "export": "ru_ions", "target": "ru"},
@@ -208,6 +209,8 @@ def load_element_names_by_symbol(lang_code: str, rows: list[dict[str, str]]) -> 
         return {row["symbol"]: row["name"] for row in rows}
 
     locale_map = {
+        "ar": ("js/data/locales/ar.js", "ar_elements"),
+
         "zh": ("js/data/locales/zh.js", "zh_elements"),
         "zh-Hant": ("js/data/locales/zhHant.js", "zh_hant_elements"),
         "fr": ("js/data/locales/fr.js", "fr_elements"),
@@ -596,7 +599,7 @@ def parse_args() -> argparse.Namespace:
         "--langs",
         nargs="+",
         choices=sorted(list(LANG_CONFIG.keys()) + ["zh-Hant"]),
-        default=["zh", "zh-Hant", "fr", "ru", "fa", "ur", "tl"],
+        default=["ar","zh", "zh-Hant", "fr", "ru", "fa", "ur", "tl"],
     )
     return parser.parse_args()
 

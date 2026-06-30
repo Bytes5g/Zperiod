@@ -12,6 +12,8 @@ LOCALES_DIR = ROOT / "js" / "data" / "locales" / "ions"
 
 LOCALES = {
     "zh": ("zh.js", "zh_ions"),
+    "ar": ("ar.js", "ar_ions"),
+
     "zh-Hant": ("zhHant.js", "zh_hant_ions"),
     "fr": ("fr.js", "fr_ions"),
     "ru": ("ru.js", "ru_ions"),

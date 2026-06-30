@@ -11,6 +11,7 @@ LOCALES_DIR = ROOT / "js" / "data" / "locales"
 SOURCE_PATH = ROOT / "en_source.json"
 
 LOCALES = {
+    "ar": ("ar.js", "ar_elements"),
     "fr": ("fr.js", "fr_elements"),
     "ru": ("ru.js", "ru_elements"),
     "fa": ("fa.js", "fa_elements"),

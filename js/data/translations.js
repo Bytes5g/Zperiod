@@ -3,6 +3,7 @@
 // =============================================================================
 
 import { enUI } from "./locales/ui/en.js";
+import { arUI } from "./locales/ui/ar.js";
 import { zhUI } from "./locales/ui/zh.js";
 import { zhHantUI } from "./locales/ui/zh-Hant.js";
 import { frUI } from "./locales/ui/fr.js";
@@ -17,6 +18,7 @@ import { tlUI } from "./locales/ui/tl.js";
  */
 export const translations = {
   "en": enUI,
+  "ar": arUI,
   "zh": zhUI,
   "zh-Hant": zhHantUI,
   "fr": frUI,

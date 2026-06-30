@@ -19,6 +19,7 @@ OUT_FILE = ROOT / "js" / "data" / "changelogLocales.js"
 opencc = OpenCC("s2tw")
 
 LANGS = {
+    "ar": "ar",
     "zh": "zh-CN",
     "fr": "fr",
     "ru": "ru",

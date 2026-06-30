@@ -205,6 +205,7 @@ export function initOnboardingFlow() {
       <p style="color: #64748b; margin-bottom: 20px; font-size: 1.1rem;">Choose your preferred language to continue</p>
       <div class="lang-grid">
         <button class="lang-btn" data-lang="en">English</button>
+        <button class="lang-btn" data-lang="ar">العربية</button>
         <button class="lang-btn" data-lang="zh">简体中文</button>
         <button class="lang-btn" data-lang="zh-Hant">繁體中文</button>
         <button class="lang-btn" data-lang="fr">Français</button>
@@ -237,7 +238,7 @@ export function initOnboardingFlow() {
   }, 1600);
 
   function startDanmaku() {
-    const supportedLangs = ["en", "zh", "zh-Hant", "fr", "ru", "fa", "ur", "tl"];
+    const supportedLangs = ["en","ar", "zh", "zh-Hant", "fr", "ru", "fa", "ur", "tl"];
     const allPhrases = [];
     supportedLangs.forEach(l => {
         const phrases = t(`onboarding.phrases`, [], l);

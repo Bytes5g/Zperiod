@@ -251,6 +251,7 @@ function localizeNoAdditionalData() {
   if (lang.startsWith("zh")) return "暂无更多详细数据。";
   if (lang.startsWith("ru")) return "Дополнительные данные отсутствуют.";
   if (lang.startsWith("fr")) return "Aucune information supplementaire disponible.";
+  if (lang.startsWith("ar")) return "لا توجد بيانات إضافية متاحة.";
   if (lang.startsWith("fa")) return "اطلاعات تکمیلی موجود نیست.";
   if (lang.startsWith("ur")) return "مزید تفصیلی معلومات دستیاب نہیں۔";
   if (lang.startsWith("tl")) return "Wala pang karagdagang detalye.";
@@ -267,7 +268,10 @@ function buildLocalizedCommonIonNote(element, symbol) {
   if (lang.startsWith("ru")) {
     return `${symbol} — распространенный ион элемента ${localizedName} в его обычных соединениях.`;
   }
-  if (lang.startsWith("fa")) {
+  if (lang.startsWith("ar")) {
+    return `${symbol} هو أيون شائع من العنصر ${localizedName} في مركباته المعتادة.`;
+  }
+   if (lang.startsWith("fa")) {
     return `${symbol} یکی از یون‌های رایج ${localizedName} در ترکیبات معمول آن است.`;
   }
   if (lang.startsWith("ur")) {
@@ -409,6 +413,20 @@ function localizeValence(val) {
       .replace(/\(acts like 1\)/gi, "(مانند 1 عمل می کند)")
       .replace(/subshell/gi, "زیرلایه")
       .replace(/outer/gi, "خارجی");
+  } 
+  if (lang === "ar") {
+    return String(val)
+      .replace(/Variable \(outer s \+ d \+ f\)/i, "متغير (خارجي s + d + f)")
+      .replace(/Variable \(outer s \+ d\)/i, "متغير (خارجي s + d)")
+      .replace(/Variable \(outer s \+ f\)/i, "متغير (خارجي s + f)")
+      .replace(/Variable \(outer d only here\)/i, "متغير (خارجي d فقط هنا)")
+      .replace(/Variable/i, "متغير")
+      .replace(/\(d-subshell is full\)/gi, "(الغلاف الفرعي d ممتلئ)")
+      .replace(/\(s-subshell only\)/gi, "(غلاف فرعي s فقط)")
+      .replace(/\(f-subshell filling\)/gi, "(الغلاف الفرعي f يتم ملؤه)")
+      .replace(/\(acts like 1\)/gi, "(يتصرف مثل 1)")
+      .replace(/subshell/gi, "غلاف فرعي")
+      .replace(/outer/gi, "خارجي");
   }
   if (lang === "fr") {
     return String(val)
@@ -443,6 +461,7 @@ function localizeNA() {
   if (lang.startsWith("zh")) return "暂无";
   if (lang.startsWith("ru")) return "Н/Д";
   if (lang.startsWith("fr")) return "N/D";
+  if (lang.startsWith("ar")) return "غير متوفر";
   if (lang.startsWith("fa")) return "ناموجود";
   if (lang.startsWith("ur")) return "دستیاب نہیں";
   if (lang.startsWith("tl")) return "Wala";
@@ -546,6 +565,14 @@ function buildIsotopeFallbackNote(element, isotope) {
     if (isRadioactive && /trace/i.test(percentText)) return "ایزوتوپ رادیواکتیو که در طبیعت فقط به مقدار ناچیز یافت می‌شود.";
     if (isRadioactive && abundance) return `ایزوتوپ رادیواکتیو ${localizeElementName(element)}؛ فراوانی طبیعی ${abundance}.`;
     if (isRadioactive) return `ایزوتوپ رادیواکتیو ${localizeElementName(element)}.`;
+    return localizeNoAdditionalData();
+  }
+  if (lang.startsWith("ar")) {
+    if (isStable && abundance) return `نظير مستقر ${localizeElementName(element)}؛ الوفرة الطبيعية ${abundance}.`;
+    if (isStable) return `نظير مستقر ${localizeElementName(element)}.`;
+    if (isRadioactive && /trace/i.test(percentText)) return "نظير مشع موجود فقط بكميات ضئيلة في الطبيعة.";
+    if (isRadioactive && abundance) return `نظير مشع ${localizeElementName(element)}؛ الوفرة الطبيعية ${abundance}.`;
+    if (isRadioactive) return `نظير مشع ${localizeElementName(element)}.`;
     return localizeNoAdditionalData();
   }
   if (lang.startsWith("ur")) {
