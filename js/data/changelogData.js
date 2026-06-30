@@ -68,7 +68,7 @@ export const changelogData = [
       "Chemistry Tools: Equation Balancer, Molar Mass, Empirical Formula, Solubility Table",
       "Worksheet Generator with PDF export",
       "Google Analytics & Microsoft Clarity integration",
-      "Custom domain (zperiod.app) configured",
+      "Custom domain (zperiod.ahattech.com) configured",
     ],
   },
   {

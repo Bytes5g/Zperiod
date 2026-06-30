@@ -11,4 +11,17 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id) return;
+
+          if (id.includes('/js/data/locales/ui/')) return 'ui-locales';
+          if (id.includes('/js/data/locales/ions/')) return 'ion-locales';
+          if (id.includes('/js/data/locales/')) return 'element-locales';
+        },
+      },
+    },
+  },
 });

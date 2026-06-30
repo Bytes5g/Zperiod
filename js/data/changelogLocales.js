@@ -61,7 +61,7 @@ export const changelogLocales = {
         "化学工具：方程配平器、摩尔质量、经验公式、溶解度表",
         "具有 PDF 导出功能的工作表生成器",
         "Google Analytics 和 Microsoft Clarity 集成",
-        "配置的自定义域 (zperiod.app)"
+        "配置的自定义域 (zperiod.ahattech.com)"
       ]
     },
     "0.5.0": {
@@ -139,7 +139,7 @@ export const changelogLocales = {
         "Outils de chimie : équilibreur d'équation, masse molaire, formule empirique, tableau de solubilité",
         "Générateur de feuilles de calcul avec exportation PDF",
         "Intégration de Google Analytics et Microsoft Clarity",
-        "Domaine personnalisé (zperiod.app) configuré"
+        "Domaine personnalisé (zperiod.ahattech.com) configuré"
       ]
     },
     "0.5.0": {
@@ -295,7 +295,7 @@ export const changelogLocales = {
         "أدوات الكيمياء: موازن المعادلات، الكتلة المولية، الصيغة التجريبية، جدول الذوبان",
         "منشئ أوراق العمل مع تصدير PDF",
         "دمج Google Analytics و Microsoft Clarity",
-        "تم تكوين النطاق المخصص (zperiod.app)"
+        "تم تكوين النطاق المخصص (zperiod.ahattech.com)"
       ]
     },
     "0.5.0": {
@@ -373,7 +373,7 @@ export const changelogLocales = {
         "ابزارهای شیمی: متعادل کننده معادلات، جرم مولی، فرمول تجربی، جدول حلالیت",
         "مولد کاربرگ با صادرات PDF",
         "ادغام Google Analytics و Microsoft Clarity",
-        "دامنه سفارشی (zperiod.app) پیکربندی شد"
+        "دامنه سفارشی (zperiod.ahattech.com) پیکربندی شد"
       ]
     },
     "0.5.0": {
@@ -451,7 +451,7 @@ export const changelogLocales = {
         "کیمسٹری کے اوزار: مساوات کا توازن، داڑھ ماس، تجرباتی فارمولہ، حل پذیری ٹیبل",
         "پی ڈی ایف ایکسپورٹ کے ساتھ ورک شیٹ جنریٹر",
         "گوگل تجزیات اور مائیکروسافٹ کلیرٹی انضمام",
-        "حسب ضرورت ڈومین (zperiod.app) کنفیگر ہو گیا۔"
+        "حسب ضرورت ڈومین (zperiod.ahattech.com) کنفیگر ہو گیا۔"
       ]
     },
     "0.5.0": {
@@ -529,7 +529,7 @@ export const changelogLocales = {
         "Mga Tool sa Chemistry: Equation Balancer, Molar Mass, Empirical Formula, Solubility Table",
         "Worksheet Generator na may PDF export",
         "Pagsasama ng Google Analytics at Microsoft Clarity",
-        "Na-configure ang custom na domain (zperiod.app)."
+        "Na-configure ang custom na domain (zperiod.ahattech.com)."
       ]
     },
     "0.5.0": {
@@ -607,7 +607,7 @@ export const changelogLocales = {
         "化學工具：方程配平器、摩爾質量、經驗公式、溶解度表",
         "具有 PDF 導出功能的工作表生成器",
         "Google Analytics 和 Microsoft Clarity 集成",
-        "配置的自定義域 (zperiod.app)"
+        "配置的自定義域 (zperiod.ahattech.com)"
       ]
     },
     "0.5.0": {

@@ -1,14 +1,12 @@
 import { t } from './langController.js';
+import 'driver.js/dist/driver.css';
+
+async function loadDriver() {
+    const module = await import('driver.js');
+    return module.driver;
+}
 
 function ensureDriverTutorialAssets() {
-    if (!document.getElementById('driver-css')) {
-        const link = document.createElement('link');
-        link.id = 'driver-css';
-        link.rel = 'stylesheet';
-        link.href = 'https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css';
-        document.head.appendChild(link);
-    }
-
     if (!document.getElementById('driver-custom-zperiod')) {
         const style = document.createElement('style');
         style.id = 'driver-custom-zperiod';
@@ -116,122 +114,8 @@ export async function initElementTutorial(force = false) {
     }
 
     try {
-        // Dynamically load the module and CSS to work in both Vite and vanilla ESM environments
-        const { driver } = await import('https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.mjs');
-        
-        // Ensure CSS is loaded
-        if (!document.getElementById('driver-css')) {
-            const link = document.createElement('link');
-            link.id = 'driver-css';
-            link.rel = 'stylesheet';
-            link.href = 'https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css';
-            document.head.appendChild(link);
-            
-            // Inject custom styles for smoother animations and better rounded corners
-            const style = document.createElement('style');
-            style.textContent = `
-                /* Make the overlay darker and transition smoother */
-                .driver-overlay {
-                    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-                }
-                
-                /* Style the popover to look more elegant and modern, matching Zperiod UI */
-                .custom-driver-popover {
-                    border-radius: 20px !important;
-                    box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important;
-                    border: none !important;
-                    padding: 24px !important;
-                    font-family: inherit !important;
-                    background: rgba(255, 255, 255, 0.72) !important;
-                    backdrop-filter: blur(20px) saturate(180%) !important;
-                    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-                    opacity: 1;
-                    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-                }
-                .custom-driver-popover.fade-out {
-                    opacity: 0 !important;
-                }
-                .driver-overlay {
-                    transition: opacity 0.4s ease, fill 0.4s ease !important;
-                }
-                .driver-overlay.fade-out {
-                    opacity: 0 !important;
-                }
-                .custom-driver-popover .driver-popover-title {
-                    font-size: 1.15rem !important;
-                    font-weight: 700 !important;
-                    margin-bottom: 8px !important;
-                    color: #000000 !important;
-                }
-                .custom-driver-popover .driver-popover-description {
-                    font-size: 0.95rem !important;
-                    color: rgba(0,0,0,0.7) !important;
-                    line-height: 1.5 !important;
-                    margin-bottom: 20px !important;
-                }
-                .custom-driver-popover .driver-popover-footer {
-                    margin-top: 20px !important;
-                }
-                .custom-driver-popover .driver-popover-next-btn, 
-                .custom-driver-popover .driver-popover-prev-btn {
-                    border-radius: 9999px !important; /* Full pill shape matching other site buttons */
-                    padding: 10px 20px !important;
-                    font-weight: 600 !important;
-                    font-size: 0.9rem !important;
-                    background: rgba(0,0,0,0.05) !important;
-                    color: #000000 !important;
-                    border: none !important;
-                    box-shadow: none !important;
-                    text-shadow: none !important;
-                    transition: background 0.2s ease !important;
-                }
-                .custom-driver-popover .driver-popover-next-btn:hover, 
-                .custom-driver-popover .driver-popover-prev-btn:hover {
-                    background: rgba(0,0,0,0.1) !important;
-                    transform: none !important;
-                }
-                .custom-driver-popover .driver-popover-close-btn {
-                    position: absolute !important;
-                    top: 12px !important;
-                    right: 12px !important;
-                    width: auto !important;
-                    height: auto !important;
-                    padding: 4px 14px !important;
-                    background: rgba(0,0,0,0.06) !important;
-                    border: none !important;
-                    border-radius: 9999px !important;
-                    font-size: 0 !important;
-                    color: transparent !important;
-                    cursor: pointer !important;
-                    transition: all 0.2s ease !important;
-                    display: flex !important;
-                    align-items: center !important;
-                    justify-content: center !important;
-                    overflow: hidden !important;
-                }
-                .custom-driver-popover .driver-popover-close-btn:hover {
-                    background: rgba(0,0,0,0.12) !important;
-                }
-                .custom-driver-popover .driver-popover-close-btn::after {
-                    content: 'Skip';
-                    font-size: 0.8rem;
-                    font-weight: 600;
-                    color: rgba(0,0,0,0.45);
-                }
-                .custom-driver-popover .driver-popover-close-btn:hover::after {
-                    color: rgba(0,0,0,0.7);
-                }
-                .custom-driver-popover .driver-popover-title {
-                    padding-right: 60px !important;
-                }
-                .driver-popover-arrow.driver-popover-arrow-side-top,
-                .driver-popover-arrow.driver-popover-arrow-side-bottom {
-                    left: calc(50% - 5px) !important;
-                    right: auto !important;
-                }
-            `;
-            document.head.appendChild(style);
-        }
+        const driver = await loadDriver();
+        ensureDriverTutorialAssets();
 
         startTutorial(driver, tutorialKey, force ? 100 : 1200);
     } catch (e) {
@@ -250,54 +134,8 @@ export async function initBalancerTutorial(force = false) {
     }
 
     try {
-        const { driver } = await import('https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.mjs');
-        
-        if (!document.getElementById('driver-css')) {
-            const link = document.createElement('link');
-            link.id = 'driver-css';
-            link.rel = 'stylesheet';
-            link.href = 'https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css';
-            document.head.appendChild(link);
-            
-            const style = document.createElement('style');
-            style.textContent = `
-                .driver-overlay { transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) !important; }
-                .custom-driver-popover {
-                    border-radius: 20px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important;
-                    border: none !important; padding: 24px !important; font-family: inherit !important;
-                    background: rgba(255, 255, 255, 0.72) !important;
-                    backdrop-filter: blur(20px) saturate(180%) !important;
-                    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-                    opacity: 1; transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-                }
-                .custom-driver-popover.fade-out { opacity: 0 !important; }
-                .driver-overlay { transition: opacity 0.4s ease, fill 0.4s ease !important; }
-                .driver-overlay.fade-out { opacity: 0 !important; }
-                .custom-driver-popover .driver-popover-title { font-size: 1.15rem !important; font-weight: 700 !important; margin-bottom: 8px !important; color: #000000 !important; }
-                .custom-driver-popover .driver-popover-description { font-size: 0.95rem !important; color: rgba(0,0,0,0.7) !important; line-height: 1.5 !important; margin-bottom: 20px !important; }
-                .custom-driver-popover .driver-popover-footer { margin-top: 20px !important; }
-                .custom-driver-popover .driver-popover-next-btn, .custom-driver-popover .driver-popover-prev-btn {
-                    border-radius: 9999px !important; padding: 10px 20px !important; font-weight: 600 !important; font-size: 0.9rem !important;
-                    background: rgba(0,0,0,0.05) !important; color: #000000 !important; border: none !important; box-shadow: none !important; text-shadow: none !important; transition: background 0.2s ease !important;
-                }
-                .custom-driver-popover .driver-popover-next-btn:hover, .custom-driver-popover .driver-popover-prev-btn:hover { background: rgba(0,0,0,0.1) !important; transform: none !important; }
-                .custom-driver-popover .driver-popover-close-btn {
-                    position: absolute !important; top: 12px !important; right: 12px !important;
-                    width: auto !important; height: auto !important; padding: 4px 14px !important;
-                    background: rgba(0,0,0,0.06) !important; border: none !important; border-radius: 9999px !important;
-                    font-size: 0 !important; color: transparent !important;
-                    cursor: pointer !important; transition: all 0.2s ease !important;
-                    display: flex !important; align-items: center !important; justify-content: center !important;
-                    overflow: hidden !important;
-                }
-                .custom-driver-popover .driver-popover-close-btn:hover { background: rgba(0,0,0,0.12) !important; }
-                .custom-driver-popover .driver-popover-close-btn::after { content: 'Skip'; font-size: 0.8rem; font-weight: 600; color: rgba(0,0,0,0.45); }
-                .custom-driver-popover .driver-popover-close-btn:hover::after { color: rgba(0,0,0,0.7); }
-                .custom-driver-popover .driver-popover-title { padding-right: 60px !important; }
-                .driver-popover-arrow.driver-popover-arrow-side-top, .driver-popover-arrow.driver-popover-arrow-side-bottom { left: calc(50% - 5px) !important; right: auto !important; }
-            `;
-            document.head.appendChild(style);
-        }
+        const driver = await loadDriver();
+        ensureDriverTutorialAssets();
 
         startBalancerTour(driver, tutorialKey, force ? 100 : 800);
     } catch (e) {
@@ -316,7 +154,7 @@ export async function initPredictorTutorial(force = false) {
     }
 
     try {
-        const { driver } = await import('https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.mjs');
+        const driver = await loadDriver();
         ensureDriverTutorialAssets();
         
         startPredictorTour(driver, tutorialKey, force ? 100 : 800);
@@ -336,7 +174,7 @@ export async function initMolarMassTutorial(force = false) {
     }
 
     try {
-        const { driver } = await import('https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.mjs');
+        const driver = await loadDriver();
         ensureDriverTutorialAssets();
         
         startMolarMassTour(driver, tutorialKey, force ? 100 : 800);
@@ -353,7 +191,7 @@ export async function initSolubilityTutorial(force = false) {
     }
 
     try {
-        const { driver } = await import('https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.mjs');
+        const driver = await loadDriver();
         ensureDriverTutorialAssets();
 
         startSolubilityTour(driver, tutorialKey, force ? 100 : 800);
@@ -984,15 +822,7 @@ export async function initVirtualLabTutorial(force = false) {
     }
 
     try {
-        const { driver } = await import('https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.mjs');
-
-        if (!document.getElementById('driver-css')) {
-            const link = document.createElement('link');
-            link.id = 'driver-css';
-            link.rel = 'stylesheet';
-            link.href = 'https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css';
-            document.head.appendChild(link);
-        }
+        const driver = await loadDriver();
         ensureDriverTutorialAssets();
 
         startVirtualLabTour(driver, tutorialKey, force ? 100 : 800);

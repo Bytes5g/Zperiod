@@ -21,6 +21,29 @@ const TOOL_LISTENER_MAP = {
 };
 
 let virtualLabCleanup = null;
+const localScriptPromises = new Map();
+
+function loadLocalScriptOnce(src) {
+  if (localScriptPromises.has(src)) return localScriptPromises.get(src);
+
+  const promise = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.async = true;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
+    document.body.appendChild(script);
+  });
+
+  localScriptPromises.set(src, promise);
+  return promise;
+}
+
+async function ensureMatterReady() {
+  if (window.Matter) return window.Matter;
+  await loadLocalScriptOnce("js/vendor/matter.min.js");
+  return window.Matter;
+}
 
 export function attachToolEventListeners(toolType) {
   TOOL_LISTENER_MAP[toolType]?.();
@@ -810,10 +833,23 @@ function attachMolarMassListeners() {
   }
 }
 
-function attachVirtualLabListeners() {
+async function attachVirtualLabListeners() {
   if (typeof virtualLabCleanup === "function") {
     virtualLabCleanup();
     virtualLabCleanup = null;
+  }
+
+  let MatterLib;
+  try {
+    MatterLib = await ensureMatterReady();
+  } catch (error) {
+    console.error("Failed to initialize virtual lab physics:", error);
+    return;
+  }
+
+  if (!MatterLib) {
+    console.warn("Matter.js is not available; virtual lab initialization aborted.");
+    return;
   }
 
   const scene = document.getElementById("virtual-lab-scene");
@@ -1928,7 +1964,6 @@ function attachVirtualLabListeners() {
     }
   }
 
-  const MatterLib = window.Matter;
   let matterEngine, matterCubeBody, matterStandBody;
   let matterSceneBodies = [];
   let matterBeakerBodies = [];
