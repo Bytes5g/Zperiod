@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  plugins: [],
   server: {
     proxy: {
       // Proxy all /api/chem requests to the chemistry API server
